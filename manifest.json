@@ -1,0 +1,73 @@
+{
+  "manifest_version": 2,
+  "name": "拼多多快速购买",
+  "description": "第一个版本，为了能够快速从淘宝上面购买商品。",
+  "version": "1.0",
+  "options_page": "html/option.html",
+  "browser_action": {
+    "default_icon": "images/logo.png",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/jquery-3.2.1.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mms.pinduoduo.com/*"
+      ],
+      "js": [
+        "js/pinduoduo.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://buy.taobao.com/*",
+        "https://buy.taobao.com/*"
+      ],
+      "js": [
+        "js/taobao.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://buy.tmall.com/*",
+        "https://buy.tmall.com/*"
+      ],
+      "js": [
+        "js/tmall.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "images/*"
+  ],
+  "commands": {
+    "getUserInfo": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Z"
+      },
+      "description": "get user info"
+    },
+    "setUserInfo": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+X"
+      },
+      "description": "set user info"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>",
+    "notifications"
+  ]
+}

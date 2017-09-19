@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>用户登录</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" type="text/css" href="../css/option.css">
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <style>
+      #div_custom_service{
+        font-size: 18px;
+        font-family: 'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei',\\5FAE\\8F6F\\96C5\\9ED1,\\5B8B\\4F53,sans-serif;
+      }
+    </style>
+  </head>
+  <body class="container-fluid" id="win" style="padding-top: 20px;">
+    <div id="login_s" class="col-sm-4 text-center" style="padding-top: 30px;">
+      <div class="text-center">
+        <div class="lg_left self-center" id="login_panel" style="display:block">
+          <div class="lg_area c_borderB c_boderRadius">
+            <i class="c_img i_user"></i>
+            <input type="text" placeholder="用户名,没有限制随便输入即可" name="username" maxlength="100" class="la_length">
+          </div>
+          <div class="lg_area c_borderB c_boderRadius c_marginTop20 c_marginB30" id="bs_u_0">
+            <i class="c_img i_password"></i>
+            <input type="text" placeholder="密码" name="userpass" maxlength="30" class="la_length">
+          </div>
+          <button type="button" class="btn btn-info btn-block popup-login" id="bs_login_btn">登录</button>
+          <button type="button" class="btn btn-info btn-block popup-login" id="bs_register_btn">注册</button>
+        </div>
+        <div id="div_has_login" ></div>
+      </div>
+    </div>
+
+    <div id="div_goodname_url" class="col-sm-8">
+      <form class="form-horizontal col-sm-offset-2 col-sm-8">
+        <div class="form-group">
+          <div class="col-sm-4">
+            <input class="input_goodname form-control" placeholder="请输入一个商品名字">
+          </div>
+          <div class="col-sm-7">
+            <input class="input_url form-control" placeholder="请输入一个对应的url">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4">
+            <input class="input_goodname form-control" placeholder="请输入一个商品名字">
+          </div>
+          <div class="col-sm-7">
+            <input class="input_url form-control" placeholder="请输入一个对应的url">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4">
+            <input class="input_goodname form-control" placeholder="请输入一个商品名字">
+          </div>
+          <div class="col-sm-7">
+            <input class="input_url form-control" placeholder="请输入一个对应的url">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4">
+            <input class="input_goodname form-control" placeholder="请输入一个商品名字">
+          </div>
+          <div class="col-sm-7">
+            <input class="input_url form-control" placeholder="请输入一个对应的url">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4">
+            <input class="input_goodname form-control" placeholder="请输入一个商品名字">
+          </div>
+          <div class="col-sm-7">
+            <input class="input_url form-control" placeholder="请输入一个对应的url">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4">
+            <input class="input_goodname form-control" placeholder="请输入一个商品名字">
+          </div>
+          <div class="col-sm-7">
+            <input class="input_url form-control" placeholder="请输入一个对应的url">
+          </div>
+        </div>
+        <button type="button" class="btn btn-info popup-login col-sm-11" id="btn_save_goodname_url">保存商品名和连接</button>
+      </form>
+    </div>
+    <div id="div_custom_service" class="text-center" style="clear: both;position:fixed; bottom:40px;width: 100%">
+      <span style="margin: 0 auto;">如果有问题请联系客服,微信 jjhlxtt , wbcx19930316</span>
+    </div>
+  </body>
+  <script type="text/javascript" src="../js/option.js"></script>
+</html>

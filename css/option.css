@@ -1,0 +1,538 @@
+@charset "utf-8";
+* {
+    font-family: "Microsoft Yahei", "STHeitiSC-Light", "Arial", sans-serif;
+}
+
+body {
+    background-color: #E9E9E9;
+    font-size: 12px;
+    color: #555555
+}
+
+h1, h2, dl, dt, dd, ul, li, p, form {
+    margin: 0;
+    padding: 0
+}
+
+input[type=text] {
+    font-size: 12px
+}
+
+.c_colorG {
+    color: #679F37
+}
+
+.c_colorR {
+    color: #FF8B59
+}
+
+.c_colorGS {
+    color: #9FBF59
+}
+
+.c_colorH {
+    color: #A9A9A9
+}
+
+.c_colorHS {
+    color: #E3E5E7
+}
+
+.c_colorB {
+    color: #2DA5DF
+}
+
+.c_marginTB10 {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.c_marginB10 {
+    margin-bottom: 10px
+}
+
+.c_marginB20 {
+    margin-bottom: 20px
+}
+
+.c_marginB30 {
+    margin-bottom: 30px
+}
+
+.c_marginTop20 {
+    margin-top: 20px
+}
+
+.c_marginTop10 {
+    margin-top: 10px
+}
+
+.c_padding30 {
+    padding: 30px
+}
+
+.c_padding20 {
+    padding: 20px
+}
+
+.c_paddingTB20 {
+    padding: 20px
+}
+
+.c_padding10 {
+    padding: 10px
+}
+
+.c_paddingB20 {
+    padding-bottom: 20px
+}
+
+.c_paddingLR20 {
+    padding: 0 20px
+}
+
+.c_paddingLR30 {
+    padding: 0 30px
+}
+
+.c_hidden {
+    overflow: hidden
+}
+
+.c_relative {
+    position: relative
+}
+
+.c_cursor {
+    cursor: pointer
+}
+
+.c_none {
+    display: none
+}
+
+.c_boderRadius {
+    border-radius: 5px
+}
+
+.c_floatLeft {
+    float: left
+}
+
+.c_floatRight {
+    float: right
+}
+
+.c_marginAuto {
+    margin: 0 auto
+}
+
+.c_maxWidth {
+    width: 1175px;
+    position: relative;
+}
+
+.c_bgWhite {
+    background-color: #ffffff
+}
+
+.c_shadow1 {
+    -webkit-box-shadow: 0 2px 3px #D6D6D6;
+    -moz-box-shadow: 0 2px 3px #D6D6D6;
+    box-shadow: 0 2px 3px #D6D6D6;
+}
+
+.c_shadow2 {
+    -webkit-box-shadow: 5px 5px 0px #D9D9D9;
+    -moz-box-shadow: 5px 5px 0px #D9D9D9;
+    box-shadow: 5px 5px 0px #D9D9D9;
+}
+
+.c_img {
+    background: url("../images/common.png") no-repeat
+}
+
+.c_border {
+    border: 1px solid #E5E5E5
+}
+
+.c_borderT {
+    border-top: 1px solid #E5E5E5
+}
+
+.c_borderL {
+    border-left: 1px solid #E5E5E5
+}
+
+.c_borderB {
+    border-bottom: 1px solid #E5E5E5
+}
+
+.c_lineThrough {
+    text-decoration: line-through
+}
+
+a {
+    color: #555555
+}
+
+a:link, a:visited {
+    color: #555555
+}
+
+a:hover {
+    color: #679F37;
+    text-decoration: none
+}
+
+.moreLink:link, .moreLink:visited {
+    color: #679F37
+}
+
+.moreLink:hover {
+    color: #2DA5DF;
+    text-decoration: none
+}
+
+.sourceLink:link, .sourceLink:visited {
+    color: #ccc
+}
+
+.sourceLink:hover {
+    color: #ccc;
+    text-decoration: none
+}
+
+.c_loading {
+    width: 100%;
+    height: 100%;
+    position: relative
+}
+
+.c_loading img {
+    position: absolute;
+    top: 46%;
+    left: 46%
+}
+
+.c_empty {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    padding-top: 20px
+}
+
+body {
+    background-color: #ffffff;
+}
+
+.lg_union {
+    height: 35px;
+    margin-top: 20px
+}
+
+.lg_union i {
+    display: block;
+    position: absolute;
+    left: 0
+}
+
+.i_wx {
+    background-position: -571px -216px
+}
+
+.i_qq {
+    background-position: -549px -216px
+}
+
+#bind_s {
+    width: 360px;
+    height: 450px
+}
+
+#bind_s .lg_notice {
+    height: 40px;
+    line-height: 40px
+}
+
+#bind_s .lg_area {
+    height: 35px;
+    position: relative;
+    padding-left: 40px
+}
+
+#bind_s .lg_area i {
+    position: absolute;
+    top: 10px;
+    left: 15px
+}
+
+#bind_s .lg_area input {
+    border: 1px solid #ffffff;
+    margin: 2px;
+    height: 30px;
+    outline: 0;
+}
+
+#bind_s .lg_area .la_length2 {
+    width: 100px;
+}
+
+#bind_s .lg_area .la_length {
+    width: 250px;
+}
+
+#bind_s .lg_check {
+    height: 35px;
+    position: relative;
+}
+
+#bind_s .lg_check .lg_ckForget {
+    width: 150px;
+    text-align: right
+}
+
+#bind_s p {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    font-size: 14px
+}
+
+.lg_tab span {
+    display: inline-block;
+    height: 30px;
+    width: 90px;
+    border: 1px solid #DBDBDB;
+    margin-left: -4px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer
+}
+
+.lg_tab .lg_tabOn {
+    border: 1px solid #00B1FF;
+    background-color: #00B1FF;
+    color: #FFFFFF
+}
+
+.i_wx_new {
+    background-position: -587px -176px
+}
+
+.i_qq_new {
+    background-position: -550px -176px
+}
+
+#login {
+    width: 355px;
+    height: 605px;
+    margin: 0 auto
+}
+
+#login .lg_tab {
+    margin-left: 35px
+}
+
+#login .lg_position {
+    position: absolute;
+    top: 50%;
+    margin-top: -300px;
+}
+
+#login .lg_logo {
+    height: 133px;
+    width: 228px;
+    margin: 20px auto 20px auto;
+    background-position: 0 -487px;
+    cursor: pointer
+}
+
+#login .lg_zone {
+    width: 355px;
+    height: 440px;
+    margin: 0 auto
+}
+
+.lg_area {
+    height: 35px;
+    position: relative;
+    padding-left: 40px
+}
+
+.lg_area i {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 27px;
+    height: 27px
+}
+
+.lg_area .i_user {
+    background-position: -549px -146px
+}
+
+.lg_area .i_password {
+    background-position: -576px -146px
+}
+
+.lg_area input {
+    border: 1px solid #ffffff;
+    margin: 2px;
+    height: 30px;
+    outline: 0;
+}
+
+.lg_area .la_length {
+    width: 250px;
+}
+
+.lg_area .la_length2 {
+    width: 100px;
+}
+
+.lg_area .lg_button {
+    width: 85px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #00B1FF;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF
+}
+
+#login .lg_check {
+    height: 35px;
+    position: relative;
+}
+
+#login .lg_check .lg_ckBtn {
+    width: 150px
+}
+
+#login .lg_check .lg_ckForget {
+    width: 130px;
+    text-align: right
+}
+
+#login p {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    font-size: 12px
+}
+
+#login .lg_union {
+    text-align: center;
+    color: #A1A1A1
+}
+
+#login .lg_union p {
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0
+}
+
+#login .lg_union i {
+    width: 37px;
+    height: 38px
+}
+
+#login .lg_union span {
+    padding-left: 20px;
+    position: relative;
+    display: inline-block;
+    margin-right: 20px
+}
+
+#login_s {
+    /*width: 700px;*/
+    height: 320px;
+    margin: 0 auto;
+}
+
+#login_s .lg_tab {
+    margin-bottom: 20px;
+    margin-top: -10px
+}
+
+#login_s .lg_left {
+    width: 320px;
+}
+
+#login_s .lg_right {
+    width: 270px;
+}
+
+#login_s .lg_check {
+    height: 35px;
+    position: relative;
+}
+
+#login_s .lg_check .lg_ckBtn {
+    width: 150px
+}
+
+#login_s .lg_check .lg_ckBtn {
+    width: 150px;
+    position: relative;
+    top: -5px;
+}
+
+#login_s p {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    font-size: 14px;
+    position: absolute;
+    top: 370px;
+    /* margin-top: 40px; */
+    margin-left: 95px;
+}
+
+#login_s .lg_union i {
+    width: 20px;
+    height: 21px;
+    margin-top: -15px;
+}
+
+#login_s .lg_union span {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px
+}
+
+.popup-login {
+    border: 1px solid #00B1FF;
+    background-color: #00B1FF;
+}
+
+#login_s .lg_check .lg_ckBtn input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    position: relative;
+    top: 4px;
+}
+
+#div_has_login {
+    font-size: 16pt;
+    color:white;
+    background-color: #5bc0de;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+#div_custom_service{
+    font-size: 14pt;
+}
+
+.self-center{
+    margin: 0 auto;
+}
