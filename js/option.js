@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+/**
+ * 保存商品名 键值对
+ */
 function save_goodname_url() {
     console.log("save_goodname_url");
 

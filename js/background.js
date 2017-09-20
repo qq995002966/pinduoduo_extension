@@ -29,15 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
 //接收消息
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
+        if (request.type == "option_login_success") {
+            console.log("option_login_success");
+            canUse = true;
+            sendResponse({farewell: "success"});
+            doLogin(request.username, request.password);
+        }
         if (checkCanUse() == false) {
             return;
         }
         //拼多多js接收到popupjs的指令之后会向background js发送这样一个请求,存储用户信息
         switch (request.type) {
-            case "option_login_success":
-                doLogin(request.username, request.password);
-                sendResponse({farewell: "success"});
-                break;
             case "popup_taobao_click":
                 tellTaoBaoSetUserInfo();
                 sendResponse({farewell: "success"});
@@ -66,15 +68,6 @@ chrome.commands.onCommand.addListener(function (command) {
 function checkCanUse() {
     if (canUse == false) {
         console.log("已经过期了,请及时充值.\n谢谢您的支持(#^.^#)");
-        chrome.notifications.create(
-            'no-login-noti', {
-                type: 'basic',
-                title: "享优惠-拼多多插件",
-                message: "已经过期了,请及时充值.\n谢谢您的支持(#^.^#)"
-            },
-            function () {
-            }
-        );
         return false;
     }
     return true;
