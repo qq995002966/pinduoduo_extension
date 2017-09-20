@@ -26,6 +26,15 @@
     },
     {
       "matches": [
+        "https://member1.taobao.com/*"
+      ],
+      "js": [
+        "js/addTaoBaoAddress.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
         "http://buy.taobao.com/*",
         "https://buy.taobao.com/*"
       ],

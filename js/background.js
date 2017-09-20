@@ -7,11 +7,17 @@ var name = "";
 var phone = "";
 var address = "";
 
-var canUse = false;
 //测试是否登录
+var canUse = false;
+
+//option html中对应的 决定是 根据商品名打开网页 还是 打开淘宝  ... 1
+//新增地址的开关  ...  2
+
+var buyWorkMode;
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    //读取存储的用户名密码
     chrome.storage.sync.get({
         username: '未登录',
         password: ''
@@ -22,6 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(items.username);
             doLogin(items.username, items.password);
         }
+    });
+
+    chrome.storage.sync.get({
+        buyWorkMode: 1
+    }, function (items) {
+        buyWorkMode = items.buyWorkMode;
+        console.log("工作模式为 " + items.buyWorkMode);
     });
 });
 
@@ -34,6 +47,9 @@ chrome.runtime.onMessage.addListener(
             canUse = true;
             sendResponse({farewell: "success"});
             doLogin(request.username, request.password);
+        } else if (request.type == "option_save_buy_work_mode") {
+            buyWorkMode = request.buyWorkMode;
+            sendResponse({farewell: "success"});
         }
         if (checkCanUse() == false) {
             return;
@@ -61,7 +77,11 @@ chrome.commands.onCommand.addListener(function (command) {
     if (command.valueOf() == "getUserInfo") {
         tellPinGetUserInfo();
     } else if (command.valueOf() == "setUserInfo") {
-        tellTaoBaoSetUserInfo();
+        if (buyWorkMode == 1) {
+            tellTaoBaoSetUserInfo();
+        } else if (buyWorkMode == 2) {
+            tellTaoBaoAddAddress();
+        }
     }
 });
 
@@ -120,7 +140,12 @@ function tellPinGetUserInfo() {
             phone = response.phone;
             address = response.address;
             if (response.type == "pinduoduo_getUserInfo") {
-                openTabByGoodName(response.goodName);
+                console.log("拿到了用户名 手机号 地址，工作模式 " + buyWorkMode);
+                if (buyWorkMode == 1) {
+                    openTabByGoodName(response.goodName);
+                } else if (buyWorkMode == 2) {
+                    openTaoBaoAddAddress();
+                }
             }
             console.log(name);
             console.log(phone);
@@ -129,6 +154,25 @@ function tellPinGetUserInfo() {
     });
 }
 
+function openTaoBaoAddAddress() {
+    chrome.tabs.create({url: "https://member1.taobao.com/member/fresh/deliver_address.htm"});
+}
+
+function tellTaoBaoAddAddress() {
+    // setTimeout(function () {
+    console.log("tellTaoBaoAddAddress");
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            type: "background_addAddress",
+            name: name,
+            phone: phone,
+            address: address
+        }, function (response) {
+            console.log(response.farewell);
+        });
+    });
+    // }, 1200);
+}
 
 function doLogin(username, password) {
     //构建get url
