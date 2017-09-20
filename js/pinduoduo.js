@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(
             var userInfo = document.getElementsByClassName("o-d-b-i-c-people")[0];
             var name = userInfo.getElementsByTagName("span")[1].innerText;
             var phone = userInfo.getElementsByTagName("span")[2].innerText;
-            var goodName = document.getElementsByClassName("o-d-g-i-first")[0].innerText;
+            var goodName =document.getElementsByClassName("pdd-dui-table")[0].getElementsByTagName("td")[1].innerText;
 
             var address = document.getElementsByClassName("o-d-b-i-c-address")[0].getElementsByTagName("span")[1].innerText;
             //2.把相关的信息返回给background.js
