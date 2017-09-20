@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("bs_login_btn").addEventListener('click', login);
     document.getElementById("bs_register_btn").addEventListener('click', register);
     document.getElementById("btn_save_goodname_url").addEventListener('click', save_goodname_url);
+    document.getElementById("btn_save_work_mode").addEventListener('click', saveBuyWorkMode);
     //检查是否已经登陆过了
     chrome.storage.sync.get({
         username: '未登录',
@@ -44,6 +45,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+//点击保存购买工作模式按钮
+function saveBuyWorkMode() {
+    var mode = document.getElementsByClassName("input_work_mode")[0].value;
+    if (mode == "1" || mode == 2) {
+        chrome.storage.sync.set({
+            buyWorkMode: mode
+        }, function (items) {
+            alert("存储模式成功\n现在的工作模式是 " + ((mode == 1) ? "直接购买商品" : "仅新增地址"));
+        });
+
+        chrome.runtime.sendMessage({
+            type: "option_save_buy_work_mode",
+            buyWorkMode:mode
+        }, function (response) {
+            console.log(response.farewell);
+        });
+    }
+}
+
 /**
  * 保存商品名 键值对
  */
@@ -73,7 +93,6 @@ function save_goodname_url() {
     }
 }
 
-
 function login() {
     //从网页中读取用户名,密码
     var username = document.getElementsByName("username")[0].value;
@@ -90,7 +109,6 @@ function login() {
 
     doLogin(username, password);
 }
-
 
 function promptUser(str, flag) {
     document.getElementById("div_has_login").innerText = str;
@@ -154,7 +172,6 @@ function doRegister(username, password) {
         }
     });
 }
-
 
 function doLogin(username, password) {
     //构建get url
