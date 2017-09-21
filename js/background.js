@@ -58,11 +58,23 @@ chrome.runtime.onMessage.addListener(
         switch (request.type) {
             case "popup_taobao_click":
                 tellTaoBaoSetUserInfo();
-                sendResponse({farewell: "success"});
+                sendResponse({farewell: "success", canUse: canUse});
                 break;
             case "popup_pinduoduo_click":
                 tellPinGetUserInfo();
-                sendResponse({farewell: "success"});
+                sendResponse({farewell: "success", canUse: canUse});
+                break;
+            case "popup_oneKeyDeliver_click":
+                sendResponse({farewell: "success", canUse: canUse});
+                oneKeyDeliver();
+                break;
+            case "buyertrade_sendDetailAddress":
+                sendResponse({farewell: "success", canUse: canUse});
+                getOrderDetail(request.orderDetailAddress);
+                break;
+            case "pinduoduo_request_close":
+                sendResponse({farewell: "success", canUse: canUse});
+                closePinduoduo();
                 break;
         }
 
@@ -77,13 +89,50 @@ chrome.commands.onCommand.addListener(function (command) {
     if (command.valueOf() == "getUserInfo") {
         tellPinGetUserInfo();
     } else if (command.valueOf() == "setUserInfo") {
+        //根据当前购买的工作模式决定下一步如何工作
         if (buyWorkMode == 1) {
             tellTaoBaoSetUserInfo();
         } else if (buyWorkMode == 2) {
             tellTaoBaoAddAddress();
         }
+    } else if (command.valueOf() == "oneKeyDeliver") {
+        getSetTaoBaoOrderNum();
+    } else if (command.valueOf() == "deliverGoods") {
+        oneKeyDeliver();
     }
+
 });
+
+function closePinduoduo() {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.remove(tabs[0].id, function () {
+        });
+    });
+
+
+    chrome.tabs.query({url: "http://mms.pinduoduo.com/*"}, function (innerTabs) {
+        chrome.tabs.update(innerTabs[0].id, {active: true, highlighted: true}, function () {
+        });
+
+    });
+}
+
+/**
+ * 一键发货
+ * 1.给pinduoduo发货消息拿到所有的
+ */
+function oneKeyDeliver() {
+    //给 buyertrade.js发送一个消息,
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            type: "background_oneKeyDeliver",
+        }, function (response) {
+            //buyertrade接收到这个指令之后，会点击一下 获取详情 链接，来打开一个新的网页
+            //所以，下一步设定一个计时器，给 订单详情页 也就是 detail.js 发送一个请求
+        });
+    });
+
+}
 
 function checkCanUse() {
     if (canUse == false) {
@@ -217,6 +266,44 @@ function doLogin(username, password) {
     });
 }
 
+/**
+ * 由于淘宝的限制，这个函数只能用来获取到 备注中的淘宝订单号，然后告诉buyertrade js
+ */
+function getSetTaoBaoOrderNum() {
+    //先去pinduoduo js那里取到 备注中的 淘宝订单号
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {//发给 pinduoduo js
+            type: "background_getTaoBaoOrderNum"
+        }, function (response) {
+            var orderNum = response.taoBaoOrderNum;
+
+            console.log("备注中的淘宝订单号 " + orderNum);
+            //告诉全部购买的订单网页 也就是 buyertrade js 查询一下淘宝订单号，拿到 订单详情页的地址
+            chrome.tabs.query({url: "https://buyertrade.taobao.com/*"}, function (tabs) {
+                console.log(tabs[0].url);
+
+                //由于现在需要人工干预，所以在这一步将 所有订单页 激活
+                chrome.tabs.update(tabs[0].id, {active: true, highlighted: true}, function () {
+                });
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: "background_setOrderNum",
+                    orderNum: orderNum
+                }, function (response) {
+                    //已经拿到了订单详情页网址
+                    //用订单详情页新开一个页面，然后等待大约1500毫秒
+                    console.log(response.farewell);
+                });
+            });
+        });
+    });
+}
+
+
 function promptUser(str) {
     console.log(str);
+}
+
+function getOrderDetail(orderDetailAddress) {
+    chrome.tabs.create({active: false, url: orderDetailAddress});
+
 }

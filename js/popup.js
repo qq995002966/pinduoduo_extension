@@ -7,15 +7,34 @@ document.addEventListener('DOMContentLoaded', function () {
     var buttons = document.getElementsByTagName("button");
     for (var i = 0; i < buttons.length; i++) {
         var temp = buttons[i];
-        if (temp.innerText == "复制拼多多信息") {//为 复制拼多多信息按钮添加响应事件
-            temp.addEventListener("click", getUserInfo);
-        }
-        else if (temp.innerText == "粘贴到淘宝") {
-            temp.addEventListener("click", setUserInfoTaoBao);
+        switch (temp.innerText) {
+            case "复制拼多多信息":
+                temp.addEventListener("click", getUserInfo);
+                break;
+            case "粘贴到淘宝":
+                temp.addEventListener("click", setUserInfoTaoBao);
+                break;
+            case "一键发货本页商品":
+                temp.addEventListener("click", oneKeyDeliver);
+                break;
         }
 
     }
 });
+
+function oneKeyDeliver() {
+    console.log("oneKeyDeliver");
+
+    //给backround发消息,淘宝一键发货的按钮点击了
+    chrome.runtime.sendMessage({
+        type: "popup_oneKeyDeliver_click"
+    }, function (response) {
+        console.log(response.farewell);
+        if (response.canUse == false) {
+            alert("插件当前不可用\n请到配置页面配置!\n\n按空格键关闭提示");
+        }
+    });
+}
 
 /**
  * 复制拼多多信息 按钮响应事件,逻辑为 向get_pin_info.js发送一个消息
@@ -34,7 +53,7 @@ function getUserInfo() {
 }
 
 function setUserInfoTaoBao() {
-    console.log("getUserInfo");
+    console.log("setUserInfoTaoBao");
     //给background发消息说,粘贴到淘宝的按钮别点击了
     chrome.runtime.sendMessage({
         type: "popup_taobao_click"

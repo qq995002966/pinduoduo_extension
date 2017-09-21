@@ -20,7 +20,8 @@
         "http://mms.pinduoduo.com/*"
       ],
       "js": [
-        "js/pinduoduo.js"
+        "js/pinduoduo.js",
+        "js/jquery-3.2.1.min.js"
       ],
       "run_at": "document_idle"
     },
@@ -52,6 +53,27 @@
         "js/tmall.js"
       ],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://buyertrade.taobao.com/*",
+        "http://buyertrade.taobao.com/*"
+      ],
+      "js": [
+        "js/buyertrade.js",
+        "js/jquery-3.2.1.min.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://detail.i56.taobao.com/*"
+      ],
+      "js": [
+        "js/detail.js",
+        "js/jquery-3.2.1.min.js"
+      ],
+      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
@@ -71,6 +93,18 @@
         "windows": "Ctrl+Shift+X"
       },
       "description": "set user info"
+    },
+    "getTaoBaoOrderNum": {
+      "suggested_key": {
+        "windows": "Alt+Z"
+      },
+      "description": "get tao bao order number"
+    },
+    "deliverGoods": {
+      "suggested_key": {
+        "windows": "Alt+X"
+      },
+      "description": "获取订单详情并发货"
     }
   },
   "permissions": [
