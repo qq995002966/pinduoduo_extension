@@ -12,9 +12,9 @@ var canUse = false;
 
 //option html中对应的 决定是 根据商品名打开网页 还是 打开淘宝  ... 1
 //新增地址的开关  ...  2
-
 var buyWorkMode;
 
+//启动函数
 document.addEventListener('DOMContentLoaded', function () {
 
     //读取存储的用户名密码
@@ -40,33 +40,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 //接收消息
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        if (request.type == "option_login_success") {
-            console.log("option_login_success");
-            canUse = true;
-            sendResponse({farewell: "success"});
-            doLogin(request.username, request.password);
-        } else if (request.type == "option_save_buy_work_mode") {
-            buyWorkMode = request.buyWorkMode;
-            sendResponse({farewell: "success"});
-        }
-        if (checkCanUse() == false) {
-            return;
-        }
-        //拼多多js接收到popupjs的指令之后会向background js发送这样一个请求,存储用户信息
-        switch (request.type) {
-            case "popup_taobao_click":
-                tellTaoBaoSetUserInfo();
-                sendResponse({farewell: "success"});
-                break;
-            case "popup_pinduoduo_click":
-                tellPinGetUserInfo();
-                sendResponse({farewell: "success"});
-                break;
-        }
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.type == "option_login_success") {
+        console.log("option_login_success");
+        canUse = true;
+        sendResponse({farewell: "success"});
+        doLogin(request.username, request.password);
+    } else if (request.type == "option_save_buy_work_mode") {
+        buyWorkMode = request.buyWorkMode;
+        sendResponse({farewell: "success"});
+    }
+    if (checkCanUse() == false) {
+        return;
+    }
+    //拼多多js接收到popupjs的指令之后会向background js发送这样一个请求,存储用户信息
+    switch (request.type) {
+        case "popup_taobao_click":
+            tellTaoBaoSetUserInfo();
+            sendResponse({farewell: "success", canUse: canUse});
+            break;
+        case "popup_pinduoduo_click":
+            tellPinGetUserInfo();
+            sendResponse({farewell: "success", canUse: canUse});
+            break;
+        case "popup_oneKeyDeliver_click":
+            sendResponse({farewell: "success", canUse: canUse});
+            oneKeyDeliver();
+            break;
+    }
 
-    });
+});
 
 //接受键盘快捷键
 chrome.commands.onCommand.addListener(function (command) {
@@ -77,13 +80,34 @@ chrome.commands.onCommand.addListener(function (command) {
     if (command.valueOf() == "getUserInfo") {
         tellPinGetUserInfo();
     } else if (command.valueOf() == "setUserInfo") {
+        //根据当前购买的工作模式决定下一步如何工作
         if (buyWorkMode == 1) {
             tellTaoBaoSetUserInfo();
         } else if (buyWorkMode == 2) {
             tellTaoBaoAddAddress();
         }
+    } else if (command.valueOf() == "oneKeyDeliver") {
+        oneKeyDeliver();
     }
+
 });
+
+
+/**
+ * 一键发货
+ * 1.给pinduoduo发货消息拿到所有的
+ */
+function oneKeyDeliver() {
+    //给 buyertrade.js发送一个消息,
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            type: "background_oneKeyDeliver",
+        }, function (response) {
+            console.log(response.farewell);
+        });
+    });
+
+}
 
 function checkCanUse() {
     if (canUse == false) {
@@ -216,6 +240,7 @@ function doLogin(username, password) {
         }
     });
 }
+
 
 function promptUser(str) {
     console.log(str);

@@ -20,7 +20,8 @@
         "http://mms.pinduoduo.com/*"
       ],
       "js": [
-        "js/pinduoduo.js"
+        "js/pinduoduo.js",
+        "js/jquery-3.2.1.min.js"
       ],
       "run_at": "document_idle"
     },
@@ -64,13 +65,19 @@
       "suggested_key": {
         "windows": "Ctrl+Shift+Z"
       },
-      "description": "get user info"
+      "description": "复制拼多多信息"
     },
     "setUserInfo": {
       "suggested_key": {
         "windows": "Ctrl+Shift+X"
       },
-      "description": "set user info"
+      "description": "粘贴信息到淘宝"
+    },
+    "oneKeyDeliver": {
+      "suggested_key": {
+        "windows": "Alt+X"
+      },
+      "description": "一键发货整页商品"
     }
   },
   "permissions": [

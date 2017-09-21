@@ -1,4 +1,4 @@
-console.log("我是set_user_taobao");
+console.log("我是taobaojs");
 var name;
 var mobile;
 var address;
