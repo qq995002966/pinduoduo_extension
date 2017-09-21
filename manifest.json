@@ -53,27 +53,6 @@
         "js/tmall.js"
       ],
       "run_at": "document_idle"
-    },
-    {
-      "matches": [
-        "https://buyertrade.taobao.com/*",
-        "http://buyertrade.taobao.com/*"
-      ],
-      "js": [
-        "js/buyertrade.js",
-        "js/jquery-3.2.1.min.js"
-      ],
-      "run_at": "document_idle"
-    },
-    {
-      "matches": [
-        "https://detail.i56.taobao.com/*"
-      ],
-      "js": [
-        "js/detail.js",
-        "js/jquery-3.2.1.min.js"
-      ],
-      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
@@ -86,25 +65,19 @@
       "suggested_key": {
         "windows": "Ctrl+Shift+Z"
       },
-      "description": "get user info"
+      "description": "复制拼多多信息"
     },
     "setUserInfo": {
       "suggested_key": {
         "windows": "Ctrl+Shift+X"
       },
-      "description": "set user info"
+      "description": "粘贴信息到淘宝"
     },
-    "getTaoBaoOrderNum": {
-      "suggested_key": {
-        "windows": "Alt+Z"
-      },
-      "description": "get tao bao order number"
-    },
-    "deliverGoods": {
+    "oneKeyDeliver": {
       "suggested_key": {
         "windows": "Alt+X"
       },
-      "description": "获取订单详情并发货"
+      "description": "一键发货整页商品"
     }
   },
   "permissions": [

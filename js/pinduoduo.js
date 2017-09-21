@@ -34,7 +34,9 @@ chrome.runtime.onMessage.addListener(
             console.log(address);
             console.log(goodName);
         } else if (request.type == "background_oneKeyDeliver") {
+            console.log("background_oneKeyDeliver")
             oneKeyDeliver();
+            sendResponse({farewell:"success"});
         }
     });
 
