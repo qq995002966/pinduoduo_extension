@@ -17,10 +17,31 @@ document.addEventListener('DOMContentLoaded', function () {
             case "一键发货本页商品":
                 temp.addEventListener("click", oneKeyDeliver);
                 break;
+            case "搜索订单备注":
+                temp.addEventListener("click",searchNote);
+                break;
         }
 
     }
 });
+
+function searchNote() {
+    console.log("searchNote");
+
+    var orderSn=document.getElementsByClassName("input-order-sn")[0].value;
+    console.log(orderSn);
+    if((orderSn!=null)&&(orderSn!=undefined)){
+        chrome.runtime.sendMessage({
+            type: "popup_searchNote_click",
+            orderSn:orderSn
+        }, function (response) {
+            console.log(response.farewell);
+            if (response.canUse == false) {
+                alert("插件当前不可用\n请到配置页面配置!\n\n按空格键关闭提示");
+            }
+        });
+    }
+}
 
 function oneKeyDeliver() {
     console.log("oneKeyDeliver");

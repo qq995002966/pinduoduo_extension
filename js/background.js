@@ -67,6 +67,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             sendResponse({farewell: "success", canUse: canUse});
             oneKeyDeliver();
             break;
+        case "popup_searchNote_click":
+            sendResponse({farewell: "success", canUse: canUse});
+            searchNote(request.orderSn);
+            break;
     }
 
 });
@@ -92,6 +96,17 @@ chrome.commands.onCommand.addListener(function (command) {
 
 });
 
+function searchNote(orderSn) {
+    console.log(orderSn);
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            type: "background_searchNote",
+            orderSn:orderSn
+        }, function (response) {
+            console.log(response.farewell);
+        });
+    });
+}
 
 /**
  * 一键发货

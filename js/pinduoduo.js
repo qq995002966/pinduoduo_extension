@@ -37,8 +37,52 @@ chrome.runtime.onMessage.addListener(
             console.log("background_oneKeyDeliver")
             oneKeyDeliver();
             sendResponse({farewell:"success"});
+        }else if(request.type=="background_searchNote"){
+            console.log("background_searchNote");
+            sendResponse({farewell:"success"});
+            searchNote(request.orderSn);
         }
     });
+
+function searchNote(order_sn) {
+    var url = "http://mms.pinduoduo.com/mars/shop/getNoteList";
+
+    var params = {};
+    params["orderSn"] = order_sn;
+
+    $.ajax(url, {
+        type: "POST",
+        async: true,
+        data: JSON.stringify(params),
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",//"xml", "html", "script", "json", "jsonp", "text".
+        // xhrFields: {  withCredentials: true  },
+        //成功返回之后调用的函数
+        success: function (data, status) {
+            console.log("searchNote");
+            console.log(data);
+            if (data.success == true) {
+                //成功的拿到了数据
+                //读取出来对应的备注
+                var result=data.result;
+                if (result.length > 0) {//说明有备注
+                    // var note = data.result[0].note;
+                    // var orderSn = data.result[0].orderSn;
+                    var alertText="";
+
+                    for(var i=0;i<result.length;i++){
+                        alertText+="第"+i+"条备注为："+result[i].note+"\n";
+                    }
+
+                    prompt("",alertText);
+                } else {//说明没有备注
+                    alert("该订单没有备注");
+                }
+            }
+        }
+    });
+}
 
 function oneKeyDeliver() {
     curGood = 0;
