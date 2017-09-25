@@ -84,6 +84,7 @@
     "tabs",
     "storage",
     "<all_urls>",
-    "notifications"
+    "notifications",
+    "background"
   ]
 }

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         username: '未登录',
         password: ''
     }, function (items) {
-        if (items.username == "未登录") {
+        if ((items.username == "未登录")||(items.username==undefined)) {
             promptUser("未登录");
         } else {
             console.log(items.username);

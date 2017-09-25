@@ -207,11 +207,13 @@ function doLogin(username, password) {
                         username: username,
                         password: password
                     }, function (items) {
-                        promptUser("已经成功登陆\n用户名 : " + username + "\t过期时间 : " + data, true);
+                        promptUser("已经成功登陆\n用户名 : " + username + "\t过期时间 : " + data+"\n如果是第一次登陆，请重启浏览器", true);
                     });
                     //告诉background
                     chrome.runtime.sendMessage({
-                        type: "option_login_success"
+                        type: "option_login_success",
+                        username:username,
+                        password:password
                     }, function (response) {
                         console.log(response.farewell);
                     });
